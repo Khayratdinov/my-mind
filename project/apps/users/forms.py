@@ -12,3 +12,19 @@ User = get_user_model()
 class UserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
+
+
+# ============================== USERPROFILEFORM ============================= #
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = [
+            "first_name",
+            "last_name",
+            "bio",
+            "avatar",
+            "address",
+            "telegram",
+            "instagram",
+        ]

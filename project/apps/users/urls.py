@@ -8,4 +8,6 @@ urlpatterns = [
         views.Register.as_view(),
         name="register",
     ),
+    path("profile/", views.UserProfile.as_view(), name="profile"),
+    path("edit_profile/", views.EditProfile.as_view(), name="edit_profile"),
 ]
