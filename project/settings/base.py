@@ -45,7 +45,7 @@ THIRD_PARTY_APPS = [
     "crispy_bootstrap4",
 ]
 
-LOCAL_APPS = ["project.apps.users", "project.apps.core"]
+LOCAL_APPS = ['project.apps.posts', "project.apps.users", "project.apps.core"]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
