@@ -12,6 +12,53 @@
         <p>{{ post.description }}</p>
         <p>{{ post.content }}</p>
         <img src="{{ post.image.url }}" alt="{{ post.title }} Image">
+        <p>Likes: <span id="likesCount">{{ post.total_likes }}</span></p>
+
+        <button id="likeButton" data-post-id="{{ post.id }}">Like</button>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <script>
+            const postId = {{ post.id }};
+            const likeUrl = "{% url 'like_post' post.id %}";
+
+            function getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+
+            $("#likeButton").click(function () {
+                const csrftoken = getCookie('csrftoken');
+                $.ajax({
+                    url: likeUrl,
+                    type: 'POST',
+                    data: {},
+                    beforeSend: function (xhr, settings) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    },
+                    success: function (data) {
+                        if (data.liked) {
+                            $(this).text("Unlike");
+                        } else {
+                            $(this).text("Like");
+                        }
+                        $("#likesCount").text(data.total_likes);
+                    }
+                });
+            });
+
+
+
+        </script>
 
 
 
